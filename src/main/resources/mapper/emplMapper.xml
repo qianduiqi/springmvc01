@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.EmplDao">
+
+    <select id="list" resultType="com.itheima.domain.Empl">
+select * from employee
+<if test="param2!=null and param2!=''">
+    where name like concat("%",#{param2},"%")
+</if>
+limit #{param1},5
+
+    </select>
+    <select id="getTotalCount" resultType="Integer" parameterType="String">
+        select count(*) from employee where name like concat("%",#{name},"%")
+    </select>
+    <update id="change" parameterType="com.itheima.domain.Empl">
+update employee set sex=#{sex},phone=#{phone},birth=#{birth},state=#{state},star=#{star} where name=#{name}
+    </update>
+    <delete id="del" parameterType="Integer">
+        delete from employee where id=#{id}
+    </delete>
+<insert id="add" parameterType="com.itheima.domain.Empl">
+<selectKey keyProperty="id" order="AFTER" resultType="Integer">
+select last_insert_id()
+</selectKey>
+    insert into employee values(#{id},#{name},#{sex},#{phone},#{birth},#{state},#{star},null,null,null)
+</insert>
+    <select id="queryTag" resultType="com.itheima.domain.Tag">
+        select * from tag where type="员工"
+    </select>
+    <insert id="addRel">
+        insert into emp_tag values(#{param1},#{param2})
+    </insert>
+    <insert id="addTest" parameterType="com.itheima.domain.Empl">
+
+        insert into employee values(#{id},#{name},#{sex},#{phone},#{birth},#{state},#{star},#{param2},null,null)
+    </insert>
+
+</mapper>

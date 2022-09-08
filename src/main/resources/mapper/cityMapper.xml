@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.CityDao">
+    <select id="list"  resultType="com.itheima.domain.City">
+        select * from city
+    </select>
+<delete id="del" parameterType="Integer">
+    delete from city where id=#{id}
+    </delete>
+<insert id="add" parameterType="com.itheima.domain.City">
+    insert into city values(#{id},#{name})
+</insert>
+    <select id="findById" parameterType="Integer" resultType="com.itheima.domain.City">
+        select * from city where id=#{param}
+    </select>
+    <delete id="delMany" >
+        delete from city where id in
+        <foreach collection="array" item="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+</mapper>

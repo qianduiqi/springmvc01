@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.DeptDao">
+    <select id="findById" parameterType="Integer" resultType="com.itheima.domain.Dept">
+        select * from t_dept where id=#{id}
+    </select>
+<select id="findIdByName" parameterType="String" resultType="com.itheima.domain.Dept">
+    select * from t_dept where name=#{deptName}
+</select>
+    <insert id="add" parameterType="com.itheima.domain.Dept">
+        insert into t_dept values(#{id},#{name},#{path},null)
+    </insert>
+    <select id="list" resultType="com.itheima.domain.Dept">
+        select * from t_dept
+    </select>
+    <delete id="del" parameterType="Integer">
+        delete from t_dept where id=#{id}
+    </delete>
+</mapper>

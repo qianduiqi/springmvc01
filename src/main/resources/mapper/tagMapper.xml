@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.TagDao">
+    <select id="findById" parameterType="Integer" resultType="com.itheima.domain.Tag">
+SELECT * FROM tag t,emp_tag et WHERE t.`id`=et.`tid` AND et.`eid`=#{id}
+    </select>
+<select id="list" resultType="com.itheima.domain.Tag">
+    select * from tag
+</select>
+    <delete id="del" parameterType="Integer">
+        delete from tag where id=#{id}
+    </delete>
+    <insert id="add" parameterType="com.itheima.domain.Tag">
+        insert into tag values(#{id},#{name},#{type})
+    </insert>
+</mapper>
